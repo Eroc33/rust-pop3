@@ -52,7 +52,7 @@ impl POP3Stream {
 		let connect_string = format!("{}:{}", host, port);
 		let tcp_stream = try!(TcpStream::connect(&connect_string[..]));
 		let mut socket = match ssl_context {
-			Some(context) => POP3Stream {stream: Ssl(SslStream::new(&context, tcp_stream).unwrap()), host: host, port: port, is_authenticated: false},
+			Some(context) => POP3Stream {stream: Ssl(SslStream::connect(&context, tcp_stream).unwrap()), host: host, port: port, is_authenticated: false},
 			None => POP3Stream {stream: Basic(tcp_stream), host: host, port: port, is_authenticated: false},
 		};
 		match socket.read_response(Greet) {
