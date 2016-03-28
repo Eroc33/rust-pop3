@@ -330,7 +330,7 @@ impl POP3Stream {
           			response.add_line(res, command.clone());
             		line_buffer = Vec::new();
         		},
-        		Err(_) => return Err(Error::new(ErrorKind::Other, "Failed to read the response"))
+        		Err(_) => return Err(Error::new(ErrorKind::Other, "Message contained invalid utf-8 byte sequence"))
       		}
 		}
 		Ok(response)
