@@ -202,10 +202,16 @@ impl POP3Stream {
 			Ok(res) => {
 				match res.result {
 					Some(s) => s,
-					None => POP3Result::POP3Err
+					None => {
+						println!("[ERROR]:EMPTY");
+						POP3Result::POP3Err
+					},
 				}
 			},
-			Err(_) => POP3Result::POP3Err
+			Err(e) => {
+				println!("[ERROR]:{}",e);
+				POP3Result::POP3Err
+			},
 		}
 	}
 
